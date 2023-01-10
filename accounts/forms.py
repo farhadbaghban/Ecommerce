@@ -57,14 +57,14 @@ class UserRegisterForm(forms.Form):
 
     def uniqe_email(self):
         email = self.cleaned_data["email"]
-        user = User.objects.filter(email=email)
+        user = User.objects.filter(email=email).exists()
         if user:
             raise ValidationError("You cant use this Email Address")
         return email
 
     def uniqe_phone_number(self):
         phone_number = self.cleaned_data["phone_number"]
-        user = User.objects.filter(phone_number=phone_number)
+        user = User.objects.filter(phone_number=phone_number).exists()
         if user:
             raise ValidationError("you cant use this phone Number")
         return phone_number
@@ -72,3 +72,8 @@ class UserRegisterForm(forms.Form):
 
 class UserVerifyForm(forms.Form):
     verify_code = forms.CharField(max_length=4, label="Verify Code")
+
+
+class UserLoginForm(forms.Form):
+    phone_number = forms.CharField(max_length=11, label="phone number")
+    password = forms.CharField(max_length=255, widget=forms.PasswordInput)

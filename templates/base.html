@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
@@ -11,13 +12,8 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <style>
-      .jumbotron {
-        padding: 20px;
-        margin-bottom: 20px;
-        background-color: #e9ecef;
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_style_header %}{% endblock extra_style_header %}
   </head>
 
   <body>
