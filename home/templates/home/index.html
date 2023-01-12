@@ -1,9 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load static %}
-{% block extra_style_header %}
-    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
-{% endblock extra_style_header %}
+ {% block extra_style_header %}
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}" />
+{% endblock extra_style_header %} 
 {% block content %}
-    <h3>Hello User</h3>
+<div>
+  {% if request.user.is_authenticated %}
+  <h3>Hello {{request.user.full_name}}</h3>
+  {% else %}
+  <h3>Hello Guest</h3>
+  {% endif %}
+</div>
+{% for product in products %}
+<div class="card" style="width: 18rem">
+  <img src="{{product.image.url}}" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.description}}</p>
+    {% if product.remaining == 0 %}
+    <a href="{{ product.get_absolute_url }}" class="btn btn-warning"
+      >More Info</a
+    >
+    {% else %}
+    <a href="{{ product.get_absolute_url }}" class="btn btn-primary"
+      >More Info and buy</a
+    >
+    {% endif %}
+  </div>
+</div>
+{% endfor %} 
 {% endblock %}
-

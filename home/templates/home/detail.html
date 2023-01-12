@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block extra_style_header %}
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}" />
+{% endblock extra_style_header %} 
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h3>Hello {{request.user.full_name}}</h3>
+  {% else %}
+  <h3>Hello Guest</h3>
+  {% endif %}
+</div>
+<div>
+    <h2>{{product.name}}</h2>
+    <small>{{product.created}}</small>
+    <br>
+    <p>{{product.price}}  $</p>
+    <img src="{{product.image.url}}" alt="">
+    <p>{{product.description}}</p>
+</div>
+{% endblock %}
